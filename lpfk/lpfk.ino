@@ -190,7 +190,7 @@ bool delayKeyPressAware(unsigned long ms) {
 
 // Helper: play a random animation
 void playRandomAnimation() {
-  laserAnimation();
+  k40Laser();
   // int pick = random(0, 4); // Add more if you want
   // switch (pick) {
   //   case 0:
@@ -414,6 +414,8 @@ void loop() {
   }
 }
 
+// ANIMATION FRAMES
+
 // Laser animation frames
 const AnimationFrame laserFrames[] = {
   FRAME(30, laser1),
@@ -479,6 +481,90 @@ const AnimationFrame k40LaserFrames[] = {
   FRAME(300, allOff),
 };
 
+
+const AnimationFrame crossHatchFrames[] = {
+  FRAME(50, crosshatch1),
+  FRAME(50, crosshatch2),
+  FRAME(50, crosshatch1),
+  FRAME(50, crosshatch2)
+};
+const AnimationFrame patternFrames[] = {
+  FRAME(0, pat0),
+  FRAME(0, pat1),
+  FRAME(0, pat2),
+  FRAME(0, pat3),
+  FRAME(0, pat4),
+  FRAME(0, pat5),
+  FRAME(0, pat6),
+  FRAME(0, pat7),
+  FRAME(0, pat8),
+  FRAME(0, pat9),
+  FRAME(0, pat10),
+  FRAME(0, pat11),
+  FRAME(0, pat12),
+  FRAME(0, pat5),
+};
+// DaVinci mode: animates "DaVinci Resolve" on LEDs, then pre-lights shortcut keys using runAnimation
+const AnimationFrame davinciFrames[] = {
+  FRAME(300, allOff),
+  FRAME(0, letterD),
+  FRAME(0, lettera),
+  FRAME(0, letterV),
+  FRAME(0, letteri),
+  FRAME(0, lettern),
+  FRAME(0, letterc),
+  FRAME(0, letteri),
+  FRAME(300, allOff),
+  FRAME(0, letterR),
+  FRAME(0, lettere),
+  FRAME(0, letters),
+  FRAME(0, lettero),
+  FRAME(0, letterl),
+  FRAME(0, letterv),
+  FRAME(0, lettere),
+  FRAME(300, allOff)
+};
+
+// Visual Code mode: animates "VSCode" on LEDs using runAnimation
+const AnimationFrame visualCodeFrames[] = {
+  FRAME(300, allOff),
+  FRAME(0, letterV),
+  FRAME(300, allOff),
+  FRAME(0, letterS),
+  FRAME(300, allOff),
+  FRAME(0, letterC),
+  FRAME(0, lettero),
+  FRAME(0, letterd),
+  FRAME(0, lettere),
+  FRAME(300, allOff)
+};
+// Everlast Engineering mode: animates logo and patterns using runAnimation
+const AnimationFrame everlastFrames[] = {
+  FRAME(250, letterE),
+  FRAME(250, letterv),
+  FRAME(250, lettere),
+  FRAME(250, letterr),
+  FRAME(250, letterl),
+  FRAME(250, lettera),
+  FRAME(250, letters),
+  FRAME(250, lettert),
+  FRAME(200, allOff),
+  FRAME(200, allOff),
+  FRAME(250, letterE),
+  FRAME(250, lettern),
+  FRAME(250, letterg),
+  FRAME(250, letteri),
+  FRAME(250, lettern),
+  FRAME(250, lettere),
+  FRAME(250, lettere),
+  FRAME(250, letterr),
+  FRAME(250, letteri),
+  FRAME(250, lettern),
+  FRAME(250, letterg),
+};
+
+
+
 // Generic interruptible animation runner
 bool runAnimation(const AnimationFrame* frames, int frameCount) {
   for (int i = 0; i < frameCount; ++i) {
@@ -493,6 +579,8 @@ bool runAnimation(const AnimationFrame* frames, int frameCount) {
   return true;
 }
 
+// Animations
+
 void laserAnimation() {
   runAnimation(laserFrames, sizeof(laserFrames)/sizeof(AnimationFrame));
 }
@@ -501,57 +589,28 @@ void engraverAnimation() {
   runAnimation(engraverFrames, sizeof(engraverFrames)/sizeof(AnimationFrame));
 }
 
+void crossHatchAnimation() {
+  runAnimation(crossHatchFrames, sizeof(crossHatchFrames)/sizeof(AnimationFrame));
+}
+
+void engraverAnimation() {
+  runAnimation(patternFrames, sizeof(patternFrames)/sizeof(AnimationFrame));
+}
+
 void k40Laser() {
   runAnimation(k40LaserFrames, sizeof(k40LaserFrames)/sizeof(AnimationFrame));
 }
 
-// DaVinci mode: animates "DaVinci Resolve" on LEDs, then pre-lights shortcut keys
 void davinci() {
-  allLights(0);
-  if (!delayKeyPressAware(300)) return;
-  directLightArray(letterD);
-  directLightArray(lettera);
-  directLightArray(letterV);
-  directLightArray(letteri);
-  directLightArray(lettern);
-  directLightArray(letterc);
-  directLightArray(letteri);
-  if (!delayKeyPressAware(300)) return;
-  allLights(0);
-  if (!delayKeyPressAware(300)) return;
-  directLightArray(letterR);
-  directLightArray(lettere);
-  directLightArray(letters);
-  directLightArray(lettero);
-  directLightArray(letterl);
-  directLightArray(letterv);
-  directLightArray(lettere);
-  if (!delayKeyPressAware(300)) return;
-  allLights(0);
-  if (!delayKeyPressAware(300)) return;
+  runAnimation(davinciFrames, sizeof(davinciFrames)/sizeof(AnimationFrame));
   mode = 0;
   preLight(); // light up shortcut keys
   flipBitInLightArray(mode,true,true); // mode indicator
   sendLights();
 }
 
-// Visual Code mode: animates "VSCode" on LEDs
 void visualCode() {
-  allLights(0);
-  if (!delayKeyPressAware(300)) return;
-  directLightArray(letterV);
-  if (!delayKeyPressAware(300)) return;
-  allLights(0);
-  if (!delayKeyPressAware(300)) return;
-  directLightArray(letterS);
-  if (!delayKeyPressAware(300)) return;
-  allLights(0);
-  if (!delayKeyPressAware(300)) return;
-  directLightArray(letterC);
-  directLightArray(lettero);
-  directLightArray(letterd);
-  directLightArray(lettere);
-  if (!delayKeyPressAware(300)) return;
+  runAnimation(visualCodeFrames, sizeof(visualCodeFrames)/sizeof(AnimationFrame));
   mode = 2;
   preLight();
   flipBitInLightArray(mode,true,true);
@@ -592,61 +651,9 @@ void preLight() {
   }
 }
 
-// Everlast Engineering mode: animates logo and patterns
+
 void everlastEngineering() {
-  int pause = 250;
-  directLightArray(crosshatch1);
-  directLightArray(crosshatch2);
-  directLightArray(crosshatch1);
-  directLightArray(crosshatch2);
-  allLights(0);
-  if (!delayKeyPressAware(300)) return;
-  directLightArray(letterE, pause);
-  directLightArray(letterv, pause);
-  directLightArray(lettere, pause);
-  directLightArray(letterr, pause);
-  directLightArray(letterl, pause);
-  directLightArray(lettera, pause);
-  directLightArray(letters, pause);
-  directLightArray(lettert, pause);
-  if (!delayKeyPressAware(200)) return;
-  allLights(0);
-  if (!delayKeyPressAware(200)) return;
-  directLightArray(letterE, pause);
-  directLightArray(lettern, pause);
-  directLightArray(letterg, pause);
-  directLightArray(letteri, pause);
-  directLightArray(lettern, pause);
-  directLightArray(lettere, pause);
-  directLightArray(lettere, pause);
-  directLightArray(letterr, pause);
-  directLightArray(letteri, pause);
-  directLightArray(lettern, pause);
-  directLightArray(letterg, pause);
-  allLights(0);
-  if (!delayKeyPressAware(1000)) return;
-  directLightArray(crosshatch1);
-  directLightArray(crosshatch2);
-  directLightArray(crosshatch1);
-  directLightArray(crosshatch2);
-  if (!delayKeyPressAware(300)) return;
-  pause = 100;
-  directLightArray(pat0, pause);
-  directLightArray(pat1, pause);
-  directLightArray(pat2, pause);
-  directLightArray(pat3, pause);
-  directLightArray(pat4, pause);
-  directLightArray(pat5, pause);
-  directLightArray(pat6, pause);
-  directLightArray(pat7, pause);
-  directLightArray(pat8, pause);
-  directLightArray(pat9, pause);
-  directLightArray(pat10, pause);
-  directLightArray(pat11, pause);
-  directLightArray(pat12, pause);
-  directLightArray(pat5, pause);
-  demoLoop(1,1);
-  demoLoop(0,1);
+  runAnimation(everlastFrames, sizeof(everlastFrames)/sizeof(AnimationFrame));
   mode = 2;
   flipBitInLightArray(mode,true,true);
   sendLights();
