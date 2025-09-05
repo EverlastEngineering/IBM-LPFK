@@ -468,17 +468,16 @@ const AnimationFrame engraverFrames[] = {
 
 // K40 Laser animation frames
 const AnimationFrame k40LaserFrames[] = {
-  FRAME(300, allOff),
-  FRAME(300, letterK),
-  FRAME(300, number4),
-  FRAME(300, number0),
-  FRAME(500, allOff),
-  FRAME(300, letterL),
-  FRAME(300, lettera),
-  FRAME(300, letters),
-  FRAME(300, lettere),
-  FRAME(300, letterr),
-  FRAME(300, allOff),
+  FRAME(400, allOff),
+  FRAME(0, letterK),
+  FRAME(0, number4),
+  FRAME(0, number0),
+  FRAME(400, allOff),
+  FRAME(0, letterL),
+  FRAME(0, lettera),
+  FRAME(0, letters),
+  FRAME(0, lettere),
+  FRAME(0, letterr),
 };
 
 
@@ -506,7 +505,7 @@ const AnimationFrame patternFrames[] = {
 };
 // DaVinci mode: animates "DaVinci Resolve" on LEDs, then pre-lights shortcut keys using runAnimation
 const AnimationFrame davinciFrames[] = {
-  FRAME(300, allOff),
+  FRAME(400, allOff),
   FRAME(0, letterD),
   FRAME(0, lettera),
   FRAME(0, letterV),
@@ -514,53 +513,51 @@ const AnimationFrame davinciFrames[] = {
   FRAME(0, lettern),
   FRAME(0, letterc),
   FRAME(0, letteri),
-  FRAME(300, allOff),
+  FRAME(400, allOff),
   FRAME(0, letterR),
   FRAME(0, lettere),
   FRAME(0, letters),
   FRAME(0, lettero),
   FRAME(0, letterl),
   FRAME(0, letterv),
-  FRAME(0, lettere),
-  FRAME(300, allOff)
+  FRAME(0, lettere)
 };
 
 // Visual Code mode: animates "VSCode" on LEDs using runAnimation
 const AnimationFrame visualCodeFrames[] = {
-  FRAME(300, allOff),
+  FRAME(400, allOff),
   FRAME(0, letterV),
-  FRAME(300, allOff),
+  FRAME(400, allOff),
   FRAME(0, letterS),
-  FRAME(300, allOff),
+  FRAME(400, allOff),
   FRAME(0, letterC),
   FRAME(0, lettero),
   FRAME(0, letterd),
   FRAME(0, lettere),
-  FRAME(300, allOff)
 };
 // Everlast Engineering mode: animates logo and patterns using runAnimation
 const AnimationFrame everlastFrames[] = {
-  FRAME(250, letterE),
-  FRAME(250, letterv),
-  FRAME(250, lettere),
-  FRAME(250, letterr),
-  FRAME(250, letterl),
-  FRAME(250, lettera),
-  FRAME(250, letters),
-  FRAME(250, lettert),
-  FRAME(200, allOff),
-  FRAME(200, allOff),
-  FRAME(250, letterE),
-  FRAME(250, lettern),
-  FRAME(250, letterg),
-  FRAME(250, letteri),
-  FRAME(250, lettern),
-  FRAME(250, lettere),
-  FRAME(250, lettere),
-  FRAME(250, letterr),
-  FRAME(250, letteri),
-  FRAME(250, lettern),
-  FRAME(250, letterg),
+  FRAME(400, allOff),
+  FRAME(0, letterE),
+  FRAME(0, letterv),
+  FRAME(0, lettere),
+  FRAME(0, letterr),
+  FRAME(0, letterl),
+  FRAME(0, lettera),
+  FRAME(0, letters),
+  FRAME(0, lettert),
+  FRAME(400, allOff),
+  FRAME(0, letterE),
+  FRAME(0, lettern),
+  FRAME(0, letterg),
+  FRAME(0, letteri),
+  FRAME(0, lettern),
+  FRAME(0, lettere),
+  FRAME(0, lettere),
+  FRAME(0, letterr),
+  FRAME(0, letteri),
+  FRAME(0, lettern),
+  FRAME(0, letterg),
 };
 
 
@@ -570,7 +567,9 @@ bool runAnimation(const AnimationFrame* frames, int frameCount) {
   for (int i = 0; i < frameCount; ++i) {
     for (int j = 0; j < 4; ++j) lightArray[j] = frames[i].pattern[j];
     sendLights();
-    if (!delayKeyPressAware(frames[i].duration)) {
+    int duration = frames[i].duration;
+    if (duration <= 0) duration = 250;
+    if (!delayKeyPressAware(duration)) {
       allLights(0);
       sendLights();
       return false;
@@ -591,10 +590,6 @@ void engraverAnimation() {
 
 void crossHatchAnimation() {
   runAnimation(crossHatchFrames, sizeof(crossHatchFrames)/sizeof(AnimationFrame));
-}
-
-void engraverAnimation() {
-  runAnimation(patternFrames, sizeof(patternFrames)/sizeof(AnimationFrame));
 }
 
 void k40Laser() {
