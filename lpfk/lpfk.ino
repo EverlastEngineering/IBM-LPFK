@@ -1,3 +1,5 @@
+#define PATTERN_DESIGN_MODE // Comment out for normal HID operation
+
 /*
  * IBM LPFK Arduino Controller
  *
@@ -40,7 +42,6 @@
  * See README.md for more details
  */
 
-// #define PATTERN_DESIGN_MODE // Comment out for normal HID operation
 
 // Animation frame structure
 struct AnimationFrame {
@@ -107,6 +108,44 @@ struct AnimationFrame {
 #define laserhit1 0x0, 0x80, 0x3F, 0x8
 #define laserhit2 0x0, 0x1, 0x3F, 0x80
 
+#define laserb1 0x0, 0x4, 0x0, 0x0
+#define laserb2 0x20, 0x4, 0x0, 0x0
+#define laserb3 0x22, 0x4, 0x0, 0x0
+#define laserb4 0x22, 0x0, 0x0, 0x0
+#define laserb5 0x2, 0x0, 0x0, 0x0
+#define laserc1 0x0, 0x0, 0x0, 0x20
+#define laserc2 0x0, 0x0, 0x0, 0x21
+#define laserc3 0x0, 0x0, 0x8, 0x21
+#define laserc4 0x0, 0x20, 0x8, 0x21
+#define laserc5 0x0, 0x21, 0x8, 0x21
+#define laserc6 0x8, 0x21, 0x8, 0x21
+#define laserc7 0x8, 0x21, 0x8, 0x1
+#define laserc8 0x8, 0x21, 0x8, 0x0
+#define laserc9 0x8, 0x21, 0x0, 0x0
+#define laserc10 0x8, 0x1, 0x0, 0x0
+#define laserc11 0x8, 0x0, 0x0, 0x0
+#define laserc11 0x8, 0x0, 0x0, 0x0
+
+#define lasere1 0x0, 0x80, 0x0, 0x0
+#define lasere2 0x0, 0xC0, 0x0, 0x0
+#define lasere3 0x0, 0xE0, 0x0, 0x0
+#define lasere4 0x0, 0xF0, 0x0, 0x0
+#define lasere5 0x0, 0xF8, 0x0, 0x0
+#define lasere6 0x0, 0xFC, 0x0, 0x0
+#define lasere7 0x10, 0xFC, 0x1, 0x0
+#define lasere8 0x1, 0xFC, 0x80, 0x0
+#define lasere9 0x10, 0x7C, 0x1, 0x0
+#define lasere10 0x1, 0x3C, 0x80, 0x0
+#define lasere11 0x10, 0x1C, 0x1, 0x0
+#define lasere12 0x1, 0xC, 0x80, 0x0
+#define lasere13 0x10, 0x4, 0x1, 0x0
+#define lasere14 0x1, 0x0, 0x80, 0x0
+#define laserea1 0x0, 0x7C, 0x0, 0x0
+#define laserea2 0x0, 0x3C, 0x0, 0x0
+#define laserea3 0x0, 0x1C, 0x0, 0x0
+#define laserea4 0x0, 0xC, 0x0, 0x0
+#define laserea5 0x0, 0x4, 0x0, 0x0
+
 #define pat0 0x6, 0x0, 0x0, 0x60
 #define pat1 0xF, 0x0, 0x0, 0xF0
 #define pat2 0xF0, 0x3, 0xC0, 0xF
@@ -136,6 +175,56 @@ struct AnimationFrame {
 #define engraver7a 0x8, 0xC3, 0x20, 0x8
 #define engraver8 0x0, 0x82, 0x0, 0x0
 
+#define k1 0x1, 0x0, 0x0, 0x0
+#define k2 0x21, 0x0, 0x0, 0x0
+#define k3 0x29, 0x8, 0x0, 0x4
+#define k4 0xA9, 0x8, 0xA, 0x4
+#define k5 0xA9, 0x18, 0x8A, 0x4
+#define k6 0xA0, 0x18, 0x8A, 0x4
+#define k7 0x0, 0x18, 0x8A, 0x4
+#define k8 0x0, 0x0, 0x8A, 0x4
+#define k9 0x0, 0x0, 0x80, 0x4
+
+#define foura 0x0, 0x80, 0x0, 0x50
+#define fourb 0x0, 0xC0, 0x80, 0x52
+#define fourc 0x0, 0xE0, 0x8A, 0x52
+#define fourd 0x0, 0xF8, 0x8A, 0x42
+#define foure 0xA0, 0xF8, 0xA, 0x42
+#define fourf 0xA5, 0x78, 0x8, 0x2
+//break
+#define fourg 0xA4, 0x38, 0x8, 0x0
+#define fourh 0x84, 0x18, 0x0, 0x0
+#define fouri 0x4, 0x10, 0x0, 0x0
+
+#define zero1 0x1, 0x0, 0x0, 0x4
+#define zero2 0x21, 0x0, 0x10, 0x4
+#define zero3 0x21, 0x1, 0x12, 0x4
+#define zero3b 0x21, 0x48, 0x10, 0x4
+#define zero4 0x23, 0x48, 0x10, 0x6
+#define zero5 0x27, 0x48, 0x10, 0x7
+#define zero6 0x2F, 0x48, 0x90, 0x7
+#define zero7 0x2F, 0x49, 0x92, 0x7
+#define zero8 0x2F, 0x1, 0x92, 0x7
+#define zero9 0xF, 0x1, 0x82, 0x7
+#define zero10 0xE, 0x1, 0x82, 0x3
+#define zero11 0xC, 0x1, 0x82, 0x1
+#define zero12 0x8, 0x1, 0x82, 0x0
+#define zero13 0x0, 0x1, 0x2, 0x0
+
+#define rzero1 0x0, 0x0, 0x0, 0x90
+#define rzero2 0x0, 0x0, 0xC0, 0x94
+#define rzero3 0x1, 0x0, 0xD2, 0x94
+#define rzero4 0x3, 0x48, 0x92, 0x5
+#define rzero5 0x26, 0x49, 0x12, 0x3 //on
+#define rzero6 0x26, 0x48, 0x12, 0x3
+#define rzero7 0x26, 0x8, 0x2, 0x3
+#define rzero8 0x26, 0x8, 0x2, 0x1
+#define rzero9 0x26, 0x8, 0x2, 0x0
+#define rzero10 0x26, 0x8, 0x0, 0x0
+#define rzero11 0x26, 0x0, 0x0, 0x0
+#define rzero12 0x6, 0x0, 0x0, 0x0
+#define rzero13 0x4, 0x0, 0x0, 0x0
+
 #include <Keyboard.h>
 #include "SoftwareSerialParity.h"
 
@@ -157,15 +246,16 @@ unsigned long lastKeyTime = 0; // Tracks last key press time
 bool screensaverActive = false;
 
 // Helper: non-blocking delay that aborts on key press
-void screensaverDelay(unsigned long ms) {
+bool screensaverDelay(unsigned long ms) {
   unsigned long start = millis();
   while (millis() - start < ms) {
     if (Serial.available() > 0 || softSerial.read() != -1) {
       screensaverActive = false;
-      break;
+      return false;
     }
-    delay(10); // Small sleep to avoid busy loop
+    delay(2); // Small sleep to avoid busy loop
   }
+  return true;
 }
 
 // Helper: checks if a keypress is available on softSerial only (does not consume buffer)
@@ -189,23 +279,22 @@ bool delayKeyPressAware(unsigned long ms) {
 }
 
 // Helper: play a random animation
-void playRandomAnimation() {
-  k40Laser();
-  // int pick = random(0, 4); // Add more if you want
-  // switch (pick) {
-  //   case 0:
-  //     demoLoop(false, 30);
-  //     break;
-  //   case 1:
-  //     laserAnimation();
-  //     break;
-  //   case 2:
-  //     k40Laser();
-  //     break;
-  //   case 3:
-  //     everlastEngineering();
-  //     break;
-  // }
+bool playRandomAnimation() {
+  int pick = random(1, 5); // Add more if you want
+  switch (pick) {
+    case 1:
+      return laserAnimation();
+      break;
+    case 2:
+      return engraverAnimation();
+      break;
+    case 3:
+      return patternAnimation();
+      break;
+    case 4:
+      return lasereAnimation();
+      break;
+  }
 }
 
 void setup() {
@@ -213,7 +302,7 @@ void setup() {
    softSerial.begin(9600,ODD);  // start serial with odd parity for LPFK
    delay(1000); 
    softSerial.write(0x08); // 0x08: enable keyboard
-  //  k40Laser();
+  //  demoLoop(false,1);
   //  laserAnimation();       // run Pac-Man animation at startup
   mode = 1;
    flipBitInLightArray(mode,true,true); // light up mode indicator LED
@@ -224,40 +313,57 @@ void setup() {
 #endif
 }
 
-void demoLoop(boolean keep) {
-  demoLoop(keep, 1); // default delay = 1ms
+// Helper to generate sweep animation frames for demoLoop
+void generateDemoLoopFrames(AnimationFrame* frames, int& frameCount, boolean keep, int stepDelay) {
+  byte sweepArray[4];
+  int idx = 0;
+  // Sweep left to right
+  for (int i = 0; i < 32; i++) {
+    if (!keep) {
+      sweepArray[0] = 0; sweepArray[1] = 0; sweepArray[2] = 0; sweepArray[3] = 0;
+    }
+    int byteLoop = i / 8;
+    sweepArray[byteLoop] |= (1 << (i - (byteLoop * 8)));
+    frames[idx].pattern[0] = sweepArray[0];
+    frames[idx].pattern[1] = sweepArray[1];
+    frames[idx].pattern[2] = sweepArray[2];
+    frames[idx].pattern[3] = sweepArray[3];
+    frames[idx].duration = stepDelay;
+    idx++;
+  }
+  // Sweep right to left
+  for (int i = 31; i >= 0; i--) {
+    if (!keep) {
+      sweepArray[0] = 0; sweepArray[1] = 0; sweepArray[2] = 0; sweepArray[3] = 0;
+    }
+    int byteLoop = i / 8;
+    if (keep) {
+      sweepArray[byteLoop] &= ~(1 << (i - (byteLoop * 8)));
+    } else {
+      sweepArray[byteLoop] |= (1 << (i - (byteLoop * 8)));
+    }
+    frames[idx].pattern[0] = sweepArray[0];
+    frames[idx].pattern[1] = sweepArray[1];
+    frames[idx].pattern[2] = sweepArray[2];
+    frames[idx].pattern[3] = sweepArray[3];
+    frames[idx].duration = stepDelay;
+    idx++;
+  }
+  // Final frame: all off
+  frames[idx].pattern[0] = 0;
+  frames[idx].pattern[1] = 0;
+  frames[idx].pattern[2] = 0;
+  frames[idx].pattern[3] = 0;
+  frames[idx].duration = stepDelay;
+  frameCount = idx + 1;
 }
 
-// Animates LEDs in a sweep pattern (left-to-right, then right-to-left)
-// If keep==true, lights stay on; else, LEDs are cleared between steps
 void demoLoop(boolean keep, int _delay) {
-  allLights(0x00); // turn off all LEDs
-  int stepDelay = max(_delay, 100); // Ensure minimum visible delay
-  // Sweep from left to right
-  for (int i = 0; i < 32; i++) {
-    int byteLoop = floor(i/8); // Determine which byte in lightArray this LED is in
-    if (!keep) fillLightsArray(0); // If not keeping lights, clear all before lighting next
-    // Light up the current LED by setting its bit in the correct byte
-    lightArray[byteLoop] = lightArray[byteLoop] + pow(2,i-(byteLoop*8))  + 0.5;
-    sendLights(); // Send updated LED state to LPFK
-    if (!delayKeyPressAware(stepDelay)) return;
-  }
-  // Sweep from right to left
-  for (int i = 31; i > -1; i--) {
-    int byteLoop = floor(i/8); // Determine which byte in lightArray this LED is in
-    int factor = 1;
-    if (!keep) {
-      fillLightsArray(0); // If not keeping lights, clear all before lighting next
-    }
-    else {
-      factor = -1; // If keeping lights, subtract to turn off LEDs one by one
-    }
-    // Turn off (or on) the current LED by adjusting its bit in the correct byte
-    lightArray[byteLoop] = lightArray[byteLoop] + (factor * pow(2,i-(byteLoop*8)))  + 0.5;
-    sendLights(); // Send updated LED state to LPFK
-    if (!delayKeyPressAware(stepDelay)) return;
-  }
-  allLights(0x00); // turn off all LEDs at the end
+  const int totalFrames = 32 + 32 + 1;
+  AnimationFrame frames[totalFrames];
+  int frameCount = 0;
+  generateDemoLoopFrames(frames, frameCount, keep, _delay);
+  runAnimation(frames, frameCount);
 }
 
 // Main loop: handles key events and serial commands
@@ -266,17 +372,20 @@ void loop() {
   if (!screensaverActive && millis() - lastKeyTime > 6000) {
     screensaverActive = true;
   }
+  bool uninterupted = true;
   if (screensaverActive) {
-    playRandomAnimation();
-    screensaverDelay(10000); // Wait 10s, abort if key pressed
-    // If still active, play another
-    if (screensaverActive) {
-      playRandomAnimation();
-      screensaverDelay(10000);
+    uninterupted = playRandomAnimation();
+    if (uninterupted) {
+      uninterupted = screensaverDelay(1000); // Wait 10s, abort if key pressed
     }
     screensaverActive = false;
-    lastKeyTime = millis(); // Reset timer after screensaver
-    return;
+    if (uninterupted) {
+      lastKeyTime = millis() - 6000; // Reset timer after screensaver
+    }
+    else {
+      lastKeyTime = millis(); // Reset timer after screensaver
+    }
+    // return;
   }
 #endif
   boolean keepReading = true;
@@ -310,10 +419,6 @@ void loop() {
       }
       else if (received == 1) {
         k40Laser(); // Laser mode on button 1
-        mode = 1;
-        preLight();
-        flipBitInLightArray(mode,true,true);
-        sendLights();
       }
       else if (received == 0) {
         davinci();
@@ -424,84 +529,169 @@ const AnimationFrame laserFrames[] = {
   FRAME(30, laser4),
   FRAME(30, laser5),
   FRAME(30, laser6),
-  FRAME(120, laserhit1),
-  FRAME(120, laserhit2),
-  FRAME(120, laser6),
-  FRAME(120, laserhit1),
-  FRAME(120, laserhit2),
-  FRAME(120, laser6),
-  FRAME(120, laserhit1),
-  FRAME(120, laserhit2),
-  FRAME(120, laser6),
-  FRAME(120, laserhit1),
-  FRAME(120, laserhit2),
-  FRAME(120, laser6),
+  FRAME(10, laserhit1),  FRAME(10, laserhit2),  FRAME(10, laser6),  FRAME(10, laserhit1),  FRAME(10, laserhit2),  FRAME(10, laser6),
+  FRAME(10, laserhit1),  FRAME(10, laserhit2),  FRAME(10, laser6),  FRAME(10, laserhit1),  FRAME(10, laserhit2),  FRAME(10, laser6),
+  FRAME(10, laserhit1),  FRAME(10, laserhit2),  FRAME(10, laser6),  FRAME(10, laserhit1),  FRAME(10, laserhit2),  FRAME(10, laser6),
+  FRAME(10, laserhit1),  FRAME(10, laserhit2),  FRAME(10, laser6),  FRAME(10, laserhit1),  FRAME(10, laserhit2),  FRAME(10, laser6),
+  FRAME(10, laserhit1),  FRAME(10, laserhit2),  FRAME(10, laser6),  FRAME(10, laserhit1),  FRAME(10, laserhit2),  FRAME(10, laser6),
   FRAME(30, laser5),
   FRAME(30, laser4),
   FRAME(30, laser3),
   FRAME(30, laser2),
   FRAME(30, laser1),
-  FRAME(2500, allOff), // allLights(0)
+  FRAME(0, allOff),
+};
+
+const AnimationFrame laserbcFrames[] = {
+  FRAME(30, laserb1),
+  FRAME(30, laserb2),
+  FRAME(30, laserb3),
+  FRAME(30, laserb4),
+  FRAME(30, laserb5),
+  FRAME(30, laserc1),
+  FRAME(30, laserc2),
+  FRAME(30, laserc3),
+  FRAME(30, laserc4),
+  FRAME(30, laserc5),
+  FRAME(30, laserc6),
+  FRAME(30, laserc7),
+  FRAME(30, laserc8),
+  FRAME(30, laserc9),
+  FRAME(30, laserc10),
+  FRAME(30, laserc11),
+  FRAME(0, allOff),
+};
+
+const AnimationFrame lasereFrames[] = {
+  FRAME(30, lasere1),
+  FRAME(30, lasere2),
+  FRAME(30, lasere3),
+  FRAME(30, lasere4),
+  FRAME(30, lasere5),
+  FRAME(30, lasere6),
+  FRAME(1, lasere7),  FRAME(1, lasere8), FRAME(1, lasere7),  FRAME(1, lasere8),
+  FRAME(1, lasere7),  FRAME(1, lasere8), FRAME(1, lasere7),  FRAME(1, lasere8),
+  FRAME(1, lasere7),  FRAME(1, lasere8), FRAME(1, lasere7),  FRAME(1, lasere8),
+  FRAME(1, lasere7),  FRAME(1, lasere8), FRAME(1, lasere7),  FRAME(1, lasere8),
+  FRAME(1, lasere7),  FRAME(1, lasere8), FRAME(1, lasere7),  FRAME(1, lasere8),
+  FRAME(1, lasere7),  FRAME(1, lasere8), FRAME(1, lasere7),  FRAME(1, lasere8),
+  FRAME(1, lasere7),  FRAME(1, lasere8), FRAME(1, lasere7),  FRAME(1, lasere8),
+  FRAME(1, lasere7),  FRAME(1, lasere8), FRAME(1, lasere7),  FRAME(1, lasere8),
+  FRAME(1, lasere7),  FRAME(1, lasere8), FRAME(1, lasere7),  FRAME(1, lasere8),
+  FRAME(1, lasere7),  FRAME(1, lasere8), FRAME(1, lasere7),  FRAME(1, lasere8),
+  FRAME(1, lasere7),  FRAME(1, lasere8), FRAME(1, lasere7),  FRAME(1, lasere8),
+  FRAME(1, lasere7),  FRAME(1, lasere8), FRAME(1, lasere7),  FRAME(1, lasere8),
+  FRAME(30, laserea1),
+  FRAME(30, laserea2),
+  FRAME(30, laserea3),
+  FRAME(30, laserea4),
+  FRAME(30, laserea5),
+  FRAME(0, allOff),
 };
 
 // Engraver animation frames (forward and reverse sweeps)
 const AnimationFrame engraverFrames[] = {
-  FRAME(500, engraver1),
+  FRAME(200, engraver1),
   FRAME(50, engraver2a), FRAME(50, engraver2b), FRAME(50, engraver2a), FRAME(50, engraver2b),
   FRAME(50, engraver3a), FRAME(50, engraver3b), FRAME(50, engraver3a), FRAME(50, engraver3b),
   FRAME(50, engraver4a), FRAME(50, engraver4b), FRAME(50, engraver4a), FRAME(50, engraver4b),
   FRAME(50, engraver5a), FRAME(50, engraver5b), FRAME(50, engraver5a), FRAME(50, engraver5b),
   FRAME(50, engraver6a), FRAME(50, engraver6b), FRAME(50, engraver6a), FRAME(50, engraver6b),
   FRAME(50, engraver7a), FRAME(50, engraver7b), FRAME(50, engraver7a), FRAME(50, engraver7b),
-  FRAME(500, engraver8),
+  FRAME(200, engraver8),
+  FRAME(1000, allOff),
   // Reverse sweep
-  FRAME(500, engraver8),
-  FRAME(50, engraver7a), FRAME(50, engraver7b), FRAME(50, engraver7a), FRAME(50, engraver7b),
-  FRAME(50, engraver6a), FRAME(50, engraver6b), FRAME(50, engraver6a), FRAME(50, engraver6b),
+  FRAME(200, engraver8),
+  FRAME(200, engraver7b), 
+  FRAME(200, engraver6b), 
+  FRAME(200, engraver5b), 
   FRAME(50, engraver5a), FRAME(50, engraver5b), FRAME(50, engraver5a), FRAME(50, engraver5b),
+  FRAME(200, engraver5b), 
+  FRAME(50, engraver5a), FRAME(50, engraver5b), FRAME(50, engraver5a), FRAME(50, engraver5b),
+  FRAME(300, engraver5b), 
+  FRAME(300, engraver4b), 
   FRAME(50, engraver4a), FRAME(50, engraver4b), FRAME(50, engraver4a), FRAME(50, engraver4b),
-  FRAME(50, engraver3a), FRAME(50, engraver3b), FRAME(50, engraver3a), FRAME(50, engraver3b),
-  FRAME(50, engraver2a), FRAME(50, engraver2b), FRAME(50, engraver2a), FRAME(50, engraver2b),
-  FRAME(500, engraver1),
+  FRAME(200, engraver4b), 
+  FRAME(50, engraver4a), FRAME(50, engraver4b), FRAME(50, engraver4a), FRAME(50, engraver4b),
+  FRAME(300, engraver3b), 
+  FRAME(200, engraver2b), 
+  FRAME(200, engraver1),
   FRAME(0, allOff), // allLights(0)
 };
 
 // K40 Laser animation frames
 const AnimationFrame k40LaserFrames[] = {
+  FRAME(1, allOff),
+  FRAME(50, k1),
+  FRAME(50, k2),
+  FRAME(50, k3),
+  FRAME(50, k4),
+  FRAME(1000, k5),
+  FRAME(50, k6),
+  FRAME(50, k7),
+  FRAME(50, k8),
+  FRAME(50, k9),
   FRAME(400, allOff),
-  FRAME(0, letterK),
-  FRAME(0, number4),
-  FRAME(0, number0),
+  FRAME(50, foura),
+  FRAME(50, fourb),
+  FRAME(50, fourc),
+  FRAME(50, fourd),
+  FRAME(50, foure),
+  FRAME(1000, fourf),
+  FRAME(50, fourg),
+  FRAME(50, fourh),
+  FRAME(50, fouri),
   FRAME(400, allOff),
+  FRAME(50, rzero1),
+  FRAME(50, rzero2),
+  FRAME(50, rzero3),
+  FRAME(50, rzero4),
+  FRAME(1000, rzero5),
+  FRAME(50, rzero6),
+  FRAME(50, rzero7),
+  FRAME(50, rzero8),
+  FRAME(50, rzero9),
+  FRAME(50, rzero10),
+  FRAME(50, rzero11),
+  FRAME(50, rzero12),
+  FRAME(50, rzero13),
+  FRAME(1000, allOff),
   FRAME(0, letterL),
-  FRAME(0, lettera),
+  FRAME(700, lettera),
   FRAME(0, letters),
   FRAME(0, lettere),
-  FRAME(0, letterr),
+  FRAME(700, letterr),
+  FRAME(0, allOff),
 };
 
 
 const AnimationFrame crossHatchFrames[] = {
-  FRAME(50, crosshatch1),
-  FRAME(50, crosshatch2),
-  FRAME(50, crosshatch1),
-  FRAME(50, crosshatch2)
+  FRAME(50, crosshatch1),  FRAME(50, crosshatch2),
+  FRAME(50, crosshatch1),  FRAME(50, crosshatch2),
+  FRAME(50, crosshatch1),  FRAME(50, crosshatch2),
+  FRAME(50, crosshatch1),  FRAME(50, crosshatch2),
+  FRAME(50, crosshatch1),  FRAME(50, crosshatch2),
+  FRAME(50, crosshatch1),  FRAME(50, crosshatch2),
+  FRAME(50, crosshatch1),  FRAME(50, crosshatch2),
+  FRAME(50, crosshatch1),  FRAME(50, crosshatch2),
+  FRAME(0, allOff),
 };
 const AnimationFrame patternFrames[] = {
-  FRAME(0, pat0),
-  FRAME(0, pat1),
-  FRAME(0, pat2),
-  FRAME(0, pat3),
-  FRAME(0, pat4),
-  FRAME(0, pat5),
-  FRAME(0, pat6),
-  FRAME(0, pat7),
-  FRAME(0, pat8),
-  FRAME(0, pat9),
-  FRAME(0, pat10),
-  FRAME(0, pat11),
-  FRAME(0, pat12),
-  FRAME(0, pat5),
+  FRAME(100, pat0),
+  FRAME(100, pat1),
+  FRAME(100, pat2),
+  FRAME(100, pat3),
+  FRAME(100, pat4),
+  FRAME(100, pat5),
+  FRAME(100, pat6),
+  FRAME(100, pat7),
+  FRAME(100, pat8),
+  FRAME(100, pat9),
+  FRAME(100, pat10),
+  FRAME(100, pat11),
+  FRAME(100, pat12),
+  FRAME(100, pat5),
+  FRAME(0, allOff),
 };
 // DaVinci mode: animates "DaVinci Resolve" on LEDs, then pre-lights shortcut keys using runAnimation
 const AnimationFrame davinciFrames[] = {
@@ -520,7 +710,8 @@ const AnimationFrame davinciFrames[] = {
   FRAME(0, lettero),
   FRAME(0, letterl),
   FRAME(0, letterv),
-  FRAME(0, lettere)
+  FRAME(0, lettere),
+  FRAME(0, allOff),
 };
 
 // Visual Code mode: animates "VSCode" on LEDs using runAnimation
@@ -534,6 +725,7 @@ const AnimationFrame visualCodeFrames[] = {
   FRAME(0, lettero),
   FRAME(0, letterd),
   FRAME(0, lettere),
+  FRAME(0, allOff),
 };
 // Everlast Engineering mode: animates logo and patterns using runAnimation
 const AnimationFrame everlastFrames[] = {
@@ -558,6 +750,7 @@ const AnimationFrame everlastFrames[] = {
   FRAME(0, letteri),
   FRAME(0, lettern),
   FRAME(0, letterg),
+  FRAME(0, allOff),
 };
 
 
@@ -580,20 +773,24 @@ bool runAnimation(const AnimationFrame* frames, int frameCount) {
 
 // Animations
 
-void laserAnimation() {
-  runAnimation(laserFrames, sizeof(laserFrames)/sizeof(AnimationFrame));
+bool laserAnimation() {
+  return runAnimation(laserFrames, sizeof(laserFrames)/sizeof(AnimationFrame));
 }
 
-void engraverAnimation() {
-  runAnimation(engraverFrames, sizeof(engraverFrames)/sizeof(AnimationFrame));
+bool lasereAnimation() {
+  return runAnimation(lasereFrames, sizeof(lasereFrames)/sizeof(AnimationFrame));
 }
 
-void crossHatchAnimation() {
-  runAnimation(crossHatchFrames, sizeof(crossHatchFrames)/sizeof(AnimationFrame));
+bool engraverAnimation() {
+  return runAnimation(engraverFrames, sizeof(engraverFrames)/sizeof(AnimationFrame));
 }
 
-void k40Laser() {
-  runAnimation(k40LaserFrames, sizeof(k40LaserFrames)/sizeof(AnimationFrame));
+bool crossHatchAnimation() {
+  return runAnimation(crossHatchFrames, sizeof(crossHatchFrames)/sizeof(AnimationFrame));
+}
+
+bool patternAnimation() {
+  return runAnimation(patternFrames, sizeof(patternFrames)/sizeof(AnimationFrame));
 }
 
 void davinci() {
@@ -601,6 +798,14 @@ void davinci() {
   mode = 0;
   preLight(); // light up shortcut keys
   flipBitInLightArray(mode,true,true); // mode indicator
+  sendLights();
+}
+
+void k40Laser() {
+  runAnimation(k40LaserFrames, sizeof(k40LaserFrames)/sizeof(AnimationFrame));
+  mode = 1;
+  preLight();
+  flipBitInLightArray(mode,true,true);
   sendLights();
 }
 
@@ -645,7 +850,6 @@ void preLight() {
     }
   }
 }
-
 
 void everlastEngineering() {
   runAnimation(everlastFrames, sizeof(everlastFrames)/sizeof(AnimationFrame));
@@ -776,14 +980,6 @@ void flipBitInLightArray(int light, boolean ignoreLit, boolean lit) {
   else {
     lightArray[whichByte] = lightArray[whichByte] + (pow(2,whichBit) + 0.5); // light that bit
   }
-}
-
-// Utility: sets LEDs to random values
-void randomLights(){
-  for (int i = 0; i<4; i++) {
-    lightArray[i] = random(0, 255);
-  }
-  sendLights();
 }
 
 // DaVinci mode: maps key indices to keyboard shortcuts
