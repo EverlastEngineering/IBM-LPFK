@@ -241,7 +241,7 @@ int keyDelay = 5;             // Delay between key presses/releases in ms
 
 // DaVinci mode: keys to pre-light and map to shortcuts
 int daVinciSet[] = {4, 5, 16, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 31};
-int k40Set[] = {4, 5, 10, 11, 12, 22, 23, 24, 25};
+int k40Set[] = {11, 14, 23, 28};
 // This array must match the keys mapped in fulfilKeyboardCommands()
 
 unsigned long lastKeyTime = 0; // Tracks last key press time
@@ -249,8 +249,12 @@ bool screensaverActive = false;
 
 float scaleFactor = 1.0; // movement scaling factor
 
+void pressScaledKey() {
+  pressScaledKey(scaleFactor);
+}
+
 // Helper: send direction key with scale modifiers
-void pressScaledKey()
+void pressScaledKey(float scaleFactor)
 {
   if (scaleFactor == 0.1)
   {
@@ -276,6 +280,11 @@ void pressScaledKey()
 }
 
 void releaseScaledKey()
+{
+  releaseScaledKey(scaleFactor);
+}
+
+void releaseScaledKey(float scaleFactor)
 {
   if (scaleFactor == 0.1)
   {
@@ -1237,6 +1246,12 @@ void comboScaledChar(String c)
   releaseScaledKey();
 }
 
+bool selectDeselectToggle = false;
+int armTriggerCount = 0;
+int fireTriggerCount = 0;
+bool isArmed = false;
+
+
 // DaVinci mode: maps key indices to keyboard shortcuts
 void fulfilKeyboardCommands(int key)
 {
@@ -1390,6 +1405,71 @@ void fulfilKeyboardCommands(int key)
   }
   else if (mode == 1) {
     // k40 laser mode
+
+    if (key == 28) {
+      // arming button
+      // should be pressed three times in quick succession to arm the laser
+      Keyboard.print(armTriggerCount);
+      armTriggerCount++;
+      if (armTriggerCount == 3) {
+        isArmed = true;
+        Keyboard.print("isArmed");
+        armTriggerCount = 0;
+      }
+      else {
+        Keyboard.print("isn'tArmed");
+        isArmed = false;
+        return;
+      }
+    }
+    else {
+      armTriggerCount = 0;
+    }
+
+    if (key == 31) {
+      Keyboard.print(isArmed);
+      Keyboard.print(fireTriggerCount);
+      if (isArmed) {
+        // firing button
+        // should be pressed three times in quick succession to fire the laser
+        fireTriggerCount++;
+        if (fireTriggerCount == 3) {
+          // fire the laser
+          Keyboard.press(KEY_LEFT_CTRL);
+          delay(keyDelay);
+          Keyboard.press(KEY_LEFT_SHIFT);
+          delay(keyDelay);
+          Keyboard.press(KEY_LEFT_ALT);
+          delay(keyDelay);
+          Keyboard.print('7');
+          delay(keyDelay);
+          Keyboard.release(KEY_LEFT_ALT);
+          delay(keyDelay);
+          Keyboard.release(KEY_LEFT_SHIFT);
+          delay(keyDelay);
+          Keyboard.release(KEY_LEFT_CTRL);
+          fireTriggerCount = 0;
+          isArmed = false; // disarm after firing
+        }
+        return;
+      }
+      else {
+        Keyboard.press(KEY_LEFT_CTRL);
+        delay(keyDelay);
+        Keyboard.press(KEY_LEFT_SHIFT);
+        delay(keyDelay);
+        Keyboard.press(KEY_LEFT_ALT);
+        delay(keyDelay);
+        Keyboard.print('0');
+        delay(keyDelay);
+        Keyboard.release(KEY_LEFT_ALT);
+        delay(keyDelay);
+        Keyboard.release(KEY_LEFT_SHIFT);
+        delay(keyDelay);
+        Keyboard.release(KEY_LEFT_CTRL);
+      } 
+    }
+
     if (key == 4) {
       comboScaledChar("q");
     }
@@ -1419,6 +1499,41 @@ void fulfilKeyboardCommands(int key)
     else if (key == 18) {
       comboScaledChar("c");
     }
+    else if (key == 7) {
+      comboScaledChar("r");
+    }
+    else if (key == 8) {
+      comboScaledChar("t");
+    }
+    else if (key == 9) {
+      comboScaledChar("y");
+    }
+    else if (key == 13) {
+      comboScaledChar("f");
+    }
+    else if (key == 14) {
+      if (selectDeselectToggle) {
+        Keyboard.print('g');
+      }
+      else {
+        Keyboard.print('G');
+      }
+      selectDeselectToggle = !selectDeselectToggle;
+    }
+    else if (key == 15) {
+      comboScaledChar("h");
+    }
+    else if (key == 19) {
+      comboScaledChar("v");
+    }
+    else if (key == 20) {
+      comboScaledChar("b");
+    }
+    else if (key == 21) {
+      comboScaledChar("n");
+    }
+
+
     switch (key)
     {
     // setting the scales

@@ -1,6 +1,10 @@
 pause
 start
 
+Burn: (jesus, really?)
+`planz clear copy preprocess validate blob preopt optimize spool`
+
+
 move 1mm 1mm
 home
 
@@ -55,6 +59,8 @@ bind alt+shift+h translate 0.1mm 0mm
 bind alt+shift+v translate -0.1mm 0.1mm
 bind alt+shift+b translate 0mm 0.1mm
 bind alt+shift+n translate 0.1mm 0.1mm
+
+bind g 
 
 bind r translate -1mm -1mm
 bind t translate 0mm -1mm
