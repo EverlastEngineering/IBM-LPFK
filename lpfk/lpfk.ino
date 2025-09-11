@@ -374,6 +374,9 @@ bool playRandomAnimation()
   case 4:
     return lasereAnimation();
     break;
+  case 5:
+    return crossHatchAnimation();
+    break;
   }
 }
 
@@ -468,7 +471,7 @@ void demoLoop(boolean keep, int _delay)
 void loop()
 {
 #ifndef PATTERN_DESIGN_MODE
-  if (!screensaverActive && millis() - lastKeyTime > 600000)
+  if (!screensaverActive && millis() - lastKeyTime > 6000 && !isArmed && mode != 1)
   {
     screensaverActive = true;
   }
@@ -498,8 +501,12 @@ void loop()
     int received = readAndReturn(); // read key event from LPFK
     if (received != -1 && received != 129)
     {
-      lastKeyTime = millis();    // Update last key time
-      screensaverActive = false; // Abort screensaver
+      if (screensaverActive) {
+        lastKeyTime = millis();    // Update last key time
+        screensaverActive = false; // Abort screensaver
+        k40Laser();
+        // sendLights();             // Restore LED state
+      }
       // If lightsStayOn is true, keep LEDs on after key press
       if (lightsStayOn && received < 32)
       {
@@ -1061,7 +1068,8 @@ void davinci()
 
 void k40Laser()
 {
-  runAnimation(k40LaserFrames, sizeof(k40LaserFrames) / sizeof(AnimationFrame));
+  if (mode != 1)
+    runAnimation(k40LaserFrames, sizeof(k40LaserFrames) / sizeof(AnimationFrame));
   mode = 1;
   preLight();
   flipBitInLightArray(mode, true, true);
@@ -1069,8 +1077,8 @@ void k40Laser()
   armTriggerCount = 0;
   isArmed = false;
   // these are different from each other to get the right lights on
-  scaleFactor = 1.0;
-  displayedScaleFactor = 0.1;
+  // scaleFactor = 1.0;
+  displayedScaleFactor = 0.0;
 }
 
 void visualCode()

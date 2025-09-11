@@ -2,16 +2,8 @@ pause
 start
 
 Burn: (jesus, really?)
-`planz clear copy preprocess validate blob preopt optimize spool`
-
-
-move 1mm 1mm
-home
-
-translate 1mm 1mm
-
-|home|up|-|move_to_laser|translateup|-|
-
+bind ctrl+alt+shift+7 planz clear copy preprocess validate blob preopt optimize spool
+bind ctrl+alt+shift+0 estop
 
 element* select
 
@@ -60,7 +52,10 @@ bind alt+shift+v translate -0.1mm 0.1mm
 bind alt+shift+b translate 0mm 0.1mm
 bind alt+shift+n translate 0.1mm 0.1mm
 
-bind g 
+bind g element* select
+bind shift+g element* select-
+
+bind m move_to_laser
 
 bind r translate -1mm -1mm
 bind t translate 0mm -1mm
