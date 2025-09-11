@@ -49,6 +49,11 @@ struct AnimationFrame
   int duration;
 };
 
+
+bool selectDeselectToggle = false;
+int armTriggerCount = 0;
+bool isArmed = false;
+
 #define FRAME(pause, pat) {{pat}, pause}
 
 // Example LED array dumps for reference
@@ -484,9 +489,9 @@ void loop()
     // return;
   }
 #endif
-  boolean keepReading = true;
-  while (keepReading)
-  {
+  // boolean keepReading = true;
+  // while (keepReading)
+  // {
     int received = readAndReturn(); // read key event from LPFK
     if (received != -1 && received != 129)
     {
@@ -516,11 +521,17 @@ void loop()
       {
         visualCode();
       }
+      #ifdef PATTERN_DESIGN_MODE
       else if (received == 9)
       {
         demoLoop(false, 1);
         lightsStayOn = !lightsStayOn;
       }
+      #endif
+      // else if (received == 8)
+      // {
+      //   logicPro(); // Logic Pro mode on button 8
+      // }
       else if (received == 1)
       {
         k40Laser(); // Laser mode on button 1
@@ -532,10 +543,10 @@ void loop()
       // Normal key press: light LED and send keyboard shortcut (if in DaVinci mode)
       else if (received < 32)
       {
-        flipBitInLightArray(received, 50);
+        flipBitInLightArray(received, 50); // causes led to blink briefly
         //        preLight();
-        sendLights();
         fulfilKeyboardCommands(received);
+        sendLights();
       }
       // Special demo pattern
       else if (received == 28)
@@ -550,8 +561,8 @@ void loop()
           lightArray[i] = ((byte)0xFF);
         }
       }
-    }
-    keepReading = false;
+    // }
+    // keepReading = false;
   }
 
   // Serial command interface for pattern creation and testing
@@ -1008,6 +1019,7 @@ void k40Laser()
   preLight();
   flipBitInLightArray(mode, true, true);
   sendLights();
+  armTriggerCount = 0;
 }
 
 void visualCode()
@@ -1212,6 +1224,12 @@ void flipBitInLightArray(int light)
   flipBitInLightArray(light, false, false);
 }
 
+void turnOffBitInLightArray(int light)
+{
+  flipBitInLightArray(light, true, true);
+  flipBitInLightArray(light, true, false);
+}
+
 // Core bit-flip logic for a single LED
 void flipBitInLightArray(int light, boolean ignoreLit, boolean lit)
 {
@@ -1246,10 +1264,6 @@ void comboScaledChar(String c)
   releaseScaledKey();
 }
 
-bool selectDeselectToggle = false;
-int armTriggerCount = 0;
-int fireTriggerCount = 0;
-bool isArmed = false;
 
 
 // DaVinci mode: maps key indices to keyboard shortcuts
@@ -1406,52 +1420,52 @@ void fulfilKeyboardCommands(int key)
   else if (mode == 1) {
     // k40 laser mode
 
-    if (key == 28) {
+    if (key == 28)
+    {
       // arming button
       // should be pressed three times in quick succession to arm the laser
-      Keyboard.print(armTriggerCount);
-      armTriggerCount++;
-      if (armTriggerCount == 3) {
-        isArmed = true;
-        Keyboard.print("isArmed");
-        armTriggerCount = 0;
+      /*
+      
+      */
+      isArmed = false;
+      if (armTriggerCount < 2) {
+        flipBitInLightArray(29+armTriggerCount, true, true);  
+        armTriggerCount++;
       }
       else {
-        Keyboard.print("isn'tArmed");
-        isArmed = false;
-        return;
+        byte oldLightArray[4];
+        for (int i = 0; i < 4; i++) oldLightArray[i] = lightArray[i];
+        laserAnimation();
+        for (int i = 0; i < 4; i++) lightArray[i] = oldLightArray[i];
+        sendLights();
+        isArmed = true;
       }
     }
-    else {
+    else if (armTriggerCount > 0)
+    {
+      turnOffBitInLightArray(29);
+      turnOffBitInLightArray(30);
+      turnOffBitInLightArray(31);
       armTriggerCount = 0;
     }
 
     if (key == 31) {
-      Keyboard.print(isArmed);
-      Keyboard.print(fireTriggerCount);
       if (isArmed) {
-        // firing button
-        // should be pressed three times in quick succession to fire the laser
-        fireTriggerCount++;
-        if (fireTriggerCount == 3) {
-          // fire the laser
-          Keyboard.press(KEY_LEFT_CTRL);
-          delay(keyDelay);
-          Keyboard.press(KEY_LEFT_SHIFT);
-          delay(keyDelay);
-          Keyboard.press(KEY_LEFT_ALT);
-          delay(keyDelay);
-          Keyboard.print('7');
-          delay(keyDelay);
-          Keyboard.release(KEY_LEFT_ALT);
-          delay(keyDelay);
-          Keyboard.release(KEY_LEFT_SHIFT);
-          delay(keyDelay);
-          Keyboard.release(KEY_LEFT_CTRL);
-          fireTriggerCount = 0;
-          isArmed = false; // disarm after firing
-        }
-        return;
+        // fire the laser
+        Keyboard.press(KEY_LEFT_CTRL);
+        delay(keyDelay);
+        Keyboard.press(KEY_LEFT_SHIFT);
+        delay(keyDelay);
+        Keyboard.press(KEY_LEFT_ALT);
+        delay(keyDelay);
+        Keyboard.print('7');
+        delay(keyDelay);
+        Keyboard.release(KEY_LEFT_ALT);
+        delay(keyDelay);
+        Keyboard.release(KEY_LEFT_SHIFT);
+        delay(keyDelay);
+        Keyboard.release(KEY_LEFT_CTRL);
+        isArmed = false; // disarm after firing
       }
       else {
         Keyboard.press(KEY_LEFT_CTRL);
