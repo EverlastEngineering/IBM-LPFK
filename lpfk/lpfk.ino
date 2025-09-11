@@ -244,15 +244,16 @@ boolean lightsStayOn = false; // If true, LEDs stay on after key press
 int mode = 0;                 // Current mode: 0=DaVinci, 1=Logic Pro, 2=Visual Code, etc.
 int keyDelay = 5;             // Delay between key presses/releases in ms
 
-// DaVinci mode: keys to pre-light and map to shortcuts
+// Keys to pre-light and map to shortcuts
 int daVinciSet[] = {4, 5, 16, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 31};
-int k40Set[] = {11, 14, 23, 28};
-// This array must match the keys mapped in fulfilKeyboardCommands()
+int k40Set[] = {11, 14, 22, 23, 24, 25, 27, 28};
+// These array should match the keys mapped in fulfilKeyboardCommands()
 
 unsigned long lastKeyTime = 0; // Tracks last key press time
 bool screensaverActive = false;
 
 float scaleFactor = 1.0; // movement scaling factor
+float displayedScaleFactor = 0.1; // movement scaling factor
 
 void pressScaledKey() {
   pressScaledKey(scaleFactor);
@@ -382,10 +383,10 @@ void setup()
   softSerial.begin(9600, ODD);  // start serial with odd parity for LPFK
   delay(1000);
   softSerial.write(0x08); // 0x08: enable keyboard
+  k40Laser();
   //  demoLoop(false,1);
-  //  laserAnimation();       // run Pac-Man animation at startup
-  mode = 1;
-  flipBitInLightArray(mode, true, true); // light up mode indicator LED
+  //  laserAnimation();       // 
+  // flipBitInLightArray(mode, true, true); // light up mode indicator LED
 #ifdef PATTERN_DESIGN_MODE
   Serial.begin(9600); // USB Serial for pattern design/debugging
 #else
@@ -461,6 +462,8 @@ void demoLoop(boolean keep, int _delay)
   runAnimation(frames, frameCount);
 }
 
+
+
 // Main loop: handles key events and serial commands
 void loop()
 {
@@ -501,7 +504,7 @@ void loop()
       if (lightsStayOn && received < 32)
       {
         // If key 9 is pressed and all LEDs are off, run demo
-        if (received == 9 && lightArray[0] == 0 && lightArray[2] == 0 && lightArray[2] == 0 && lightArray[3] == 0)
+        if (received == 9 && lightArray[0] == 0 && lightArray[1] == 0 && lightArray[2] == 0 && lightArray[3] == 0)
         {
           demoLoop(false, 1);
           lightsStayOn = !lightsStayOn;
@@ -556,6 +559,8 @@ void loop()
       // If received is out of range, turn all LEDs on
       else
       {
+        Keyboard.print("invalid key: ");
+        Keyboard.print(received);
         for (int i = 0; i < 4; i++)
         {
           lightArray[i] = ((byte)0xFF);
@@ -651,8 +656,50 @@ void loop()
       everlastEngineering();
     }
   }
-}
 
+  // special light patterns
+  if (mode == 1)
+  {
+    byte oldLightArray[4];
+    oldLightArray[2] = lightArray[2];
+    oldLightArray[3] = lightArray[3];
+    if (isArmed)
+    {
+      turnOffBitInLightArray(31);
+      if ((millis() / 500) % 2 == 0) // blink every 500ms
+      {
+        flipBitInLightArray(31);
+      }
+      if (oldLightArray[3] != lightArray[3])
+        sendLights();
+    }
+    if (displayedScaleFactor != scaleFactor)
+    {
+      displayedScaleFactor = scaleFactor;
+      turnOffBitInLightArray(22);
+      turnOffBitInLightArray(23);
+      turnOffBitInLightArray(24);
+      turnOffBitInLightArray(25);
+      if (scaleFactor == 0.1)
+      {
+        flipBitInLightArray(22);
+      }
+      else if (scaleFactor == 1.0)
+      {
+        flipBitInLightArray(23);
+      }
+      else if (scaleFactor == 10.0)
+      {
+        flipBitInLightArray(24);
+      }
+      else if (scaleFactor == 20.0)
+      {
+        flipBitInLightArray(25);
+      }
+      sendLights();
+    }
+  }
+}
 // ANIMATION FRAMES
 
 // Laser animation frames
@@ -1020,6 +1067,10 @@ void k40Laser()
   flipBitInLightArray(mode, true, true);
   sendLights();
   armTriggerCount = 0;
+  isArmed = false;
+  // these are different from each other to get the right lights on
+  scaleFactor = 1.0;
+  displayedScaleFactor = 0.1;
 }
 
 void visualCode()
@@ -1420,37 +1471,16 @@ void fulfilKeyboardCommands(int key)
   else if (mode == 1) {
     // k40 laser mode
 
-    if (key == 28)
-    {
-      // arming button
-      // should be pressed three times in quick succession to arm the laser
-      /*
-      
-      */
-      isArmed = false;
-      if (armTriggerCount < 2) {
-        flipBitInLightArray(29+armTriggerCount, true, true);  
-        armTriggerCount++;
-      }
-      else {
-        byte oldLightArray[4];
-        for (int i = 0; i < 4; i++) oldLightArray[i] = lightArray[i];
-        laserAnimation();
-        for (int i = 0; i < 4; i++) lightArray[i] = oldLightArray[i];
-        sendLights();
-        isArmed = true;
-      }
-    }
-    else if (armTriggerCount > 0)
-    {
-      turnOffBitInLightArray(29);
-      turnOffBitInLightArray(30);
-      turnOffBitInLightArray(31);
-      armTriggerCount = 0;
-    }
-
     if (key == 31) {
       if (isArmed) {
+        
+        // show laser firing animationLaser ArmedLaser ArmedLaser Armedbinvalid key: 40
+        byte oldLightArray[4];
+        for (int i = 0; i < 4; i++) oldLightArray[i] = lightArray[i];
+        lasereAnimation();
+        for (int i = 0; i < 4; i++) lightArray[i] = oldLightArray[i];
+        sendLights();
+        
         // fire the laser
         Keyboard.press(KEY_LEFT_CTRL);
         delay(keyDelay);
@@ -1482,6 +1512,30 @@ void fulfilKeyboardCommands(int key)
         delay(keyDelay);
         Keyboard.release(KEY_LEFT_CTRL);
       } 
+    }
+
+    if (key == 28)
+    {
+      // arming button
+      // should be pressed three times in quick succession to arm the laser
+      /*
+      
+      */
+      isArmed = false;
+      if (armTriggerCount < 2) {
+        flipBitInLightArray(29+armTriggerCount, true, true);  
+        armTriggerCount++;
+      }
+      else {
+        isArmed = true;
+      }
+    }
+    else if (armTriggerCount > 0)
+    {
+      turnOffBitInLightArray(29);
+      turnOffBitInLightArray(30);
+      armTriggerCount = 0;
+      isArmed = false;
     }
 
     if (key == 4) {
@@ -1545,6 +1599,9 @@ void fulfilKeyboardCommands(int key)
     }
     else if (key == 21) {
       comboScaledChar("n");
+    }
+    else if (key == 27) {
+      Keyboard.print("m");
     }
 
 
