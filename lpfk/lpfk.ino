@@ -356,29 +356,7 @@ bool delayKeyPressAware(unsigned long ms)
   return true; // Completed
 }
 
-// Helper: play a random animation
-bool playRandomAnimation()
-{
-  int pick = random(1, 5); // Add more if you want
-  switch (pick)
-  {
-  case 1:
-    return laserAnimation();
-    break;
-  case 2:
-    return engraverAnimation();
-    break;
-  case 3:
-    return patternAnimation();
-    break;
-  case 4:
-    return lasereAnimation();
-    break;
-  case 5:
-    return crossHatchAnimation();
-    break;
-  }
-}
+
 
 void setup()
 {
@@ -1641,4 +1619,31 @@ void fulfilKeyboardCommands(int key)
     }
   }
 #endif
+}
+
+// Helper: play a random animation
+bool playRandomAnimation()
+{
+  int pick = random(1, 7); // Add more if you want
+  switch (pick)
+  {
+  case 1:
+    return laserAnimation();
+    break;
+  case 2:
+    return engraverAnimation();
+    break;
+  case 3:
+    return patternAnimation();
+    break;
+  case 4:
+    return lasereAnimation();
+    break;
+  case 5:
+    return crossHatchAnimation();
+    break;
+  case 6:
+    return runAnimation(everlastFrames, sizeof(everlastFrames) / sizeof(AnimationFrame));
+    break;
+  }
 }
