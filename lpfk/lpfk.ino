@@ -264,8 +264,6 @@ void pressScaledKey(float scaleFactor)
 {
   if (scaleFactor == 0.1)
   {
-    Keyboard.press(KEY_LEFT_ALT);
-    delay(keyDelay);
     Keyboard.press(KEY_LEFT_SHIFT);
     delay(keyDelay);
   }
@@ -295,8 +293,6 @@ void releaseScaledKey(float scaleFactor)
   if (scaleFactor == 0.1)
   {
     Keyboard.release(KEY_LEFT_SHIFT);
-    delay(keyDelay);
-    Keyboard.release(KEY_LEFT_ALT);
     delay(keyDelay);
   }
   else if (scaleFactor == 10.0)
@@ -1525,16 +1521,36 @@ void fulfilKeyboardCommands(int key)
     }
 
     if (key == 4) {
-      comboScaledChar("q");
+      if (scaleFactor == 0.1) {
+        comboScaledChar("u");
+      }
+      else {
+        comboScaledChar("q");
+      }
     }
     else if (key == 5) {
-      comboScaledChar("w");
+      if (scaleFactor == 0.1) {
+        comboScaledChar("i");
+      }
+      else {
+        comboScaledChar("w");
+      }
     }
     else if (key == 6) {
-      comboScaledChar("e");
+      if (scaleFactor == 0.1) {
+        comboScaledChar("o");
+      }
+      else {
+        comboScaledChar("e");
+      }
     }
     else if (key == 10) {
-      comboScaledChar("a");
+      if (scaleFactor == 0.1) {
+        comboScaledChar("j");
+      }
+      else {
+        comboScaledChar("a");
+      }
     }
     else if (key == 11) {
       Keyboard.press(KEY_HOME);
@@ -1542,28 +1558,68 @@ void fulfilKeyboardCommands(int key)
       Keyboard.release(KEY_HOME);
     }
     else if (key == 12) {
-      comboScaledChar("d");
+      if (scaleFactor == 0.1) {
+        comboScaledChar("l");
+      }
+      else {
+        comboScaledChar("d");
+      }
     }
     else if (key == 16) {
-      comboScaledChar("z");
+      if (scaleFactor == 0.1) {
+        comboScaledChar("m");
+      }
+      else {
+        comboScaledChar("z");
+      }
     }
     else if (key == 17) {
-      comboScaledChar("x");
+      if (scaleFactor == 0.1) {
+        comboScaledChar(",");
+      }
+      else {
+        comboScaledChar("x");
+      }
     }
     else if (key == 18) {
-      comboScaledChar("c");
+      if (scaleFactor == 0.1) {
+        comboScaledChar(".");
+      }
+      else {
+        comboScaledChar("c");
+      }
     }
     else if (key == 7) {
-      comboScaledChar("r");
+      if (scaleFactor == 0.1) {
+        comboScaledChar("1");
+      }
+      else {
+        comboScaledChar("r");
+      }
     }
     else if (key == 8) {
-      comboScaledChar("t");
+      if (scaleFactor == 0.1) {
+        comboScaledChar("2");
+      }
+      else {
+        comboScaledChar("t");
+      }
     }
     else if (key == 9) {
-      comboScaledChar("y");
+      if (scaleFactor == 0.1) {
+        comboScaledChar("3");
+      }
+      else {
+        comboScaledChar("y");
+      }
     }
     else if (key == 13) {
-      comboScaledChar("f");
+      if (scaleFactor == 0.1) {
+        comboScaledChar("4");
+      }
+      else {
+        comboScaledChar("f");
+      }
     }
     else if (key == 14) {
       if (selectDeselectToggle) {
@@ -1575,16 +1631,36 @@ void fulfilKeyboardCommands(int key)
       selectDeselectToggle = !selectDeselectToggle;
     }
     else if (key == 15) {
-      comboScaledChar("h");
+      if (scaleFactor == 0.1) {
+        comboScaledChar("6");
+      }
+      else {
+        comboScaledChar("h");
+      }
     }
     else if (key == 19) {
-      comboScaledChar("v");
+      if (scaleFactor == 0.1) {
+        comboScaledChar("7");
+      }
+      else {
+        comboScaledChar("v");
+      }
     }
     else if (key == 20) {
-      comboScaledChar("b");
+      if (scaleFactor == 0.1) {
+        comboScaledChar("8");
+      }
+      else {
+        comboScaledChar("b");
+      }
     }
     else if (key == 21) {
-      comboScaledChar("n");
+      if (scaleFactor == 0.1) {
+        comboScaledChar("9");
+      }
+      else {
+        comboScaledChar("n");
+      }
     }
     else if (key == 27) {
       Keyboard.print("m");

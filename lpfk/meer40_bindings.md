@@ -7,14 +7,14 @@ bind ctrl+alt+shift+0 estop
 
 element* select
 
-bind alt+shift+q move_relative -0.1mm -0.1mm
-bind alt+shift+w move_relative 0mm -0.1mm
-bind alt+shift+e move_relative 0.1mm -0.1mm
-bind alt+shift+a move_relative -0.1mm 0mm
-bind alt+shift+d move_relative 0.1mm 0mm
-bind alt+shift+z move_relative -0.1mm 0.1mm
-bind alt+shift+x move_relative 0mm 0.1mm
-bind alt+shift+c move_relative 0.1mm 0.1mm
+bind shift+u move_relative -0.1mm -0.1mm
+bind shift+i move_relative 0mm -0.1mm
+bind shift+o move_relative 0.1mm -0.1mm
+bind shift+j move_relative -0.1mm 0mm
+bind shift+l move_relative 0.1mm 0mm
+bind shift+m move_relative -0.1mm 0.1mm
+bind shift+, move_relative 0mm 0.1mm
+bind shift+. move_relative 0.1mm 0.1mm
 
 bind q move_relative -1mm -1mm
 bind w move_relative 0mm -1mm
@@ -43,14 +43,14 @@ bind macctl+alt+shift+z move_relative -20mm 20mm
 bind macctl+alt+shift+x move_relative 0mm 20mm
 bind macctl+alt+shift+c move_relative 20mm 20mm
 
-bind alt+shift+r translate -0.1mm -0.1mm
-bind alt+shift+t translate 0mm -0.1mm
-bind alt+shift+y translate 0.1mm -0.1mm
-bind alt+shift+f translate -0.1mm 0mm
-bind alt+shift+h translate 0.1mm 0mm
-bind alt+shift+v translate -0.1mm 0.1mm
-bind alt+shift+b translate 0mm 0.1mm
-bind alt+shift+n translate 0.1mm 0.1mm
+bind shift+1 translate -0.1mm -0.1mm
+bind shift+2 translate 0mm -0.1mm
+bind shift+3 translate 0.1mm -0.1mm
+bind shift+4 translate -0.1mm 0mm
+bind shift+6 translate 0.1mm 0mm
+bind shift+7 translate -0.1mm 0.1mm
+bind shift+8 translate 0mm 0.1mm
+bind shift+9 translate 0.1mm 0.1mm
 
 bind g element* select
 bind shift+g element* select-
